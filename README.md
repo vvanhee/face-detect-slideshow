@@ -10,5 +10,6 @@ This project will detect the faces in your photos, center on the faces, and crop
 ## Installation
 1. Set up a new project with the Google Vison API. Get a JSON credential file for the project, install the API into Python
 1. Place the JSON file in the same directory as the python file you downloaded from this project
+1. Make sure you have installed Pillow into Python, as well as piexif (pip install Pillow, pip install piexif)
 1. Edit the python file found in this project -- add the path to your photos, your JSON file path, the pixel width and height of your frame.
 
