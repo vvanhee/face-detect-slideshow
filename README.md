@@ -5,8 +5,10 @@ Do you have a digital frame? Are you tired of the frame shrinking your portrait 
 
 This project will detect the faces in your photos, center on the faces, and crop to fit any size landscape frame!
 
+# WARNING! your original photos will be DELETED after being cropped!!!
+
 ## Installation
 1. Set up a new project with the Google Vison API. Get a JSON credential file for the project, install the API into Python
 1. Place the JSON file in the same directory as the python file you downloaded from this project
 1. Edit the python file found in this project -- add the path to your photos.
-WARNING! your original photos will be DELETED after being cropped!!!
+
