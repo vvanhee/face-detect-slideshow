@@ -11,17 +11,18 @@ import piexif
 import time
 
 
-path = 'C:\\Users\\vvanh\\Pictures'
-croppath = path + "\\tmp"
+path = 'C:/Users/vvanh/Pictures'
+credentialJSONFile = 'Digital Frame-d4547eb38205.json'
 frameWidth=480
 frameHeight=264
 maxWidthForSending = 2000
+croppath = path + "/tmp"
 
 def autoRotateAndResize(fullfilename,cropWidth,save=False):
     """ This function autorotates a picture and resizes it"""
     maxsize = (cropWidth,20000)
     name=os.path.basename(fullfilename)
-    cropfname=croppath+"\\"+name
+    cropfname=croppath+"/"+name
     image = Image.open(fullfilename)
     try:
         exif = image._getexif()
@@ -59,7 +60,7 @@ def autoRotateAndResize(fullfilename,cropWidth,save=False):
 
 def get_vision_service():
     #credentials = GoogleCredentials.get_application_default()
-    credentials = GoogleCredentials.from_stream('Digital Frame-d4547eb38205.json')
+    credentials = GoogleCredentials.from_stream(credentialJSONFile)
     return discovery.build('vision', 'v1', credentials=credentials)
 
 def detect_face(face_file, max_results=3):
@@ -157,7 +158,7 @@ def cropToY(fullfilename, resized_width, yCtr):
     else:
         scaledImg=scaledImg.crop((0,y_scaled-frameHeight/2,frameWidth,y_scaled+frameHeight/2))
     name=os.path.basename(fullfilename)
-    cropfname=croppath+"\\"+name
+    cropfname=croppath+"/"+name
     os.remove(cropfname)
     try:
         scaledImg.save(cropfname, quality=85)
@@ -171,11 +172,11 @@ if os.path.isdir(croppath):
     shutil.rmtree(croppath)
 os.mkdir(croppath)
 
-for fname in glob.glob(path+"\\*.png"):
+for fname in glob.glob(path+"/*.png"):
     name=os.path.basename(fname)
-    os.system('convert ' + fname + ' ' + path + '\\' + name + ".jpg")
+    os.system('convert ' + fname + ' ' + path + '/' + name + ".jpg")
 
-for fname in glob.glob(path+"\\*.jpg"):
+for fname in glob.glob(path+"/*.jpg"):
     name=os.path.basename(fname)
     img = autoRotateAndResize(fname, maxWidthForSending,save=True)
     if img != False:
